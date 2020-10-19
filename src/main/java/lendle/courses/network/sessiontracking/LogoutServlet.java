@@ -6,6 +6,7 @@
 package lendle.courses.network.sessiontracking;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,10 +16,10 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author lendle
+ * @author user
  */
-@WebServlet(name = "SaveSessionServlet", urlPatterns = {"/saveSession"})
-public class SaveSessionServlet extends HttpServlet {
+@WebServlet(name = "LogoutServlet", urlPatterns = {"/logout"})
+public class LogoutServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,14 +32,10 @@ public class SaveSessionServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("utf-8");
-        //建立 session 並且儲存
         HttpSession session=request.getSession();
-        String food=request.getParameter("food");
-        session.setAttribute("food", food);
-        ///////////////////////////////////////////////////////////////
+        session.invalidate();
         response.sendRedirect("session.jsp");
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
